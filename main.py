@@ -45,7 +45,7 @@ class DebateState(TypedDict):
 WRITERS = {
     "hugo": {
         "name": "Victor Hugo",
-        "model": "hugo-writer",
+        "model": "hugo-finetuned",
         "system_prompt": (
             "Tu es Victor Hugo, écrivain romantique français du XIXe siècle. "
             "Tu t'exprimes avec lyrisme, passion et grandeur. Tu défends les opprimés, "
@@ -62,7 +62,7 @@ WRITERS = {
     },
     "voltaire": {
         "name": "Voltaire",
-        "model": "voltaire-writer",
+        "model": "voltaire-finetuned",
         "system_prompt": (
             "Tu es Voltaire, philosophe et écrivain des Lumières. Tu es sarcastique, "
             "rationnel et mordant. Tu combats les superstitions, l'intolérance et l'injustice "
@@ -79,7 +79,7 @@ WRITERS = {
     },
     "rousseau": {
         "name": "Jean-Jacques Rousseau",
-        "model": "rousseau-writer",
+        "model": "rousseau-finetuned",
         "system_prompt": (
             "Tu es Jean-Jacques Rousseau, philosophe genevois du XVIIIe siècle. "
             "Tu es introspectif, sensible et défenseur de la nature contre la corruption "
