@@ -115,10 +115,13 @@ def create_training_examples(author: str, passages: list[str]) -> list[dict]:
 
         user_content = f"{user_prompt}\n\n{context}" if context else user_prompt
 
+        # Mistral exige une alternance stricte user/assistant (pas de rôle system)
+        # On intègre le system prompt dans le message user
+        full_user_content = f"{system_prompt}\n\n{user_content}"
+
         examples.append({
             "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_content},
+                {"role": "user", "content": full_user_content},
                 {"role": "assistant", "content": response},
             ]
         })
@@ -150,13 +153,15 @@ def main():
             all_examples.extend(examples)
             print(f"  {txt_file.name}: {len(passages)} passages → {len(examples)} exemples")
 
-        # Sauvegarder en JSONL
-        output_file = OUTPUT_DIR / f"{author}_train.jsonl"
+        # Sauvegarder en JSONL dans un dossier par auteur (format attendu par mlx_lm)
+        author_output_dir = OUTPUT_DIR / author
+        author_output_dir.mkdir(parents=True, exist_ok=True)
+        output_file = author_output_dir / "train.jsonl"
         with open(output_file, "w", encoding="utf-8") as f:
             for ex in all_examples:
                 f.write(json.dumps(ex, ensure_ascii=False) + "\n")
 
-        print(f"  Total : {len(all_examples)} exemples → {output_file.name}")
+        print(f"  Total : {len(all_examples)} exemples → {author}/train.jsonl")
 
     print(f"\nDatasets dans : {OUTPUT_DIR.resolve()}")
 
