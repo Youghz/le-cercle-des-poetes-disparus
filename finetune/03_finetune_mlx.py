@@ -16,8 +16,8 @@ DATASETS_DIR = Path(__file__).parent / "datasets"
 ADAPTERS_DIR = Path(__file__).parent / "adapters"
 FUSED_DIR = Path(__file__).parent / "fused_models"
 
-# Modèle de base compatible MLX — version HuggingFace de llama3.1 8B
-BASE_MODEL = "mlx-community/Meta-Llama-3.1-8B-Instruct-4bit"
+# Modèle de base compatible MLX — Mistral 7B Instruct
+BASE_MODEL = "mlx-community/Mistral-7B-Instruct-v0.3-4bit"
 
 AUTHORS = ["hugo", "voltaire", "rousseau"]
 

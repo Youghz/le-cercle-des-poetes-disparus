@@ -5,7 +5,7 @@ Trois écrivains historiques (Victor Hugo, Voltaire, Rousseau) débattent
 sur un sujet donné, chacun avec son style littéraire propre.
 
 Deux modes :
-  - Mode "prompt" : utilise llama3.1 avec des system prompts riches
+  - Mode "prompt" : utilise mistral avec des system prompts riches
   - Mode "finetuned" : utilise des modèles fine-tunés par auteur (voir finetune/)
 
 Concepts LangGraph :
@@ -45,7 +45,7 @@ class DebateState(TypedDict):
 WRITERS = {
     "hugo": {
         "name": "Victor Hugo",
-        "model": "llama3.1",  # ou "hugo-finetuned" si fine-tuné
+        "model": "mistral",  # ou "hugo-finetuned" si fine-tuné
         "system_prompt": (
             "Tu es Victor Hugo, écrivain romantique français du XIXe siècle. "
             "Tu t'exprimes avec lyrisme, passion et grandeur. Tu défends les opprimés, "
@@ -62,7 +62,7 @@ WRITERS = {
     },
     "voltaire": {
         "name": "Voltaire",
-        "model": "llama3.1",
+        "model": "mistral",
         "system_prompt": (
             "Tu es Voltaire, philosophe et écrivain des Lumières. Tu es sarcastique, "
             "rationnel et mordant. Tu combats les superstitions, l'intolérance et l'injustice "
@@ -79,7 +79,7 @@ WRITERS = {
     },
     "rousseau": {
         "name": "Jean-Jacques Rousseau",
-        "model": "llama3.1",
+        "model": "mistral",
         "system_prompt": (
             "Tu es Jean-Jacques Rousseau, philosophe genevois du XVIIIe siècle. "
             "Tu es introspectif, sensible et défenseur de la nature contre la corruption "
@@ -143,7 +143,7 @@ def make_writer_node(writer_id: str):
 
 def moderator_node(state: DebateState) -> dict:
     """Le modérateur résume le tour et relance."""
-    llm = ChatOllama(model="llama3.1", temperature=0.5)
+    llm = ChatOllama(model="mistral", temperature=0.5)
     current_round = state["round"]
 
     messages = [

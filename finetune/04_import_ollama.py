@@ -55,7 +55,7 @@ WRITERS = {
 def create_modelfile_prompt_only(author: str) -> Path:
     """Option A : Modelfile avec SYSTEM prompt seul (pas besoin de fine-tuning)."""
     writer = WRITERS[author]
-    content = f"""FROM llama3.1
+    content = f"""FROM mistral
 
 SYSTEM \"\"\"{writer['system']}\"\"\"
 
